@@ -1,24 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import { TestContext } from './TestContext';
+import React,{useEffect, useState} from 'react';
 
 function App() {
+  const [activity, setActivity] = useState('');
+
+  // const gettersSetters = {activity, setActivity}
+
+  useEffect(()=>{
+    fetch('https://igardocki-heroku-backend-ex.herokuapp.com/')
+    .then(res => res.json())
+    .then(data => setActivity(data.activity))
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <TestContext.Provider value={gettersSetters}>
+      <div>{activity}</div>
+    // </TestContext.Provider>
   );
 }
 
